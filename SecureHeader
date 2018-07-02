@@ -4,12 +4,6 @@
 # If the application receives a 500 error after applying this, remove the conflicting custom headers from the web.config of that application
 
 
-## for legacy TMG uncomment the #BETA reportUriServer for non-prod servers
-## and use teh #PROD one for production servers
-#$reportUriServer = "browser-reports.beta.coop.org" #BETA
-$reportUriServer = "browser-reports.coop.org" #PROD
-
-
 Import-Module WebAdministration;
 Write-Host "Removing header: default X-Powered-By"
 Clear-WebConfiguration "/system.webServer/httpProtocol/customHeaders/add[@name='X-Powered-By']"
