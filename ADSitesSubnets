@@ -1,0 +1,1 @@
+Get-ADReplicationSubnet -Filter * | select Name,site | group site | select @{Name='Name';Expression={$_.Name.Split(',')[0].Trim('CN=')}},@{Name='Subnets';Expression={$_.Group.Name}}
