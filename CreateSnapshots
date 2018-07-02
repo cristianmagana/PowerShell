@@ -1,0 +1,33 @@
+# Date: 06/13/2018
+# Title: Virtual Infrastructure Snapshot Inventory (-3.5 Days)
+# By: Cristian Magana
+# Version: 1.0
+
+# Stores All XXXX VCSAs In An Array
+$vCSA = @( 
+    "VC1.org",
+	"VC2.org",
+	"VC3.org",
+	"tec.org"
+);
+
+# Securely Pass Credentials Over The Network.
+$Credentials = Get-Credential
+
+# Establishes Connection To VCSAs.
+clear
+Write-Host "Connecting To All XXXX vCenters.." -ForegroundColor Green
+Connect-VIServer -Server $vCSA -Credential $Credentials
+
+
+# Retrieves All Snapshots In All XXXX Virtual Infrastructures.
+"`n"
+Write-Host "Collecting and Sorting Snapshots.." -ForegroundColor Green
+Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-3.5)} | Select-Object VM,Name,Created,@{N="SizeGB";E={[math]::Round($_.SizeGB,2)}} | Sort Created | FT 
+
+#Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-7)} | Select-Object VM,Name,Created,@{N="SizeGB";E={[math]::Round($_.SizeGB,2)}} | Sort Created | Export-CSV C:\Users\##YOUR USER ID##\Desktop\Snapshots.CSV
+
+
+
+
+ 
