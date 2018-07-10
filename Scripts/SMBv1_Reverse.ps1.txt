@@ -1,0 +1,15 @@
+﻿$Computers = Get-Content C:\ ###PATH TO FILE WITH COMPUTER NAMES###
+write-host "Applying SMB fix" -foregroundcolor "magenta"
+Foreach ($Computer in $Computers)
+{
+    #Ping Test. If PC is shut off, script will stop for the current PC in pipeline and move to the next one.
+    if (Test-Connection -ComputerName $Computer -Count 1 -Quiet)
+    {
+        New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" SMB1 -Type DWORD -Value 1 –Force
+        New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" EnableSecuritySignature -Type DWORD -Value 0 –Force
+        New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" RequireSecuritySignature -Type DWORD -Value 0 –Force
+        write-host "$Computer applied" -foregroundcolor "yellow"
+    } else {
+        write-host "$Computer didn't respond or couldn't connect" -foregroundcolor "red"
+    }
+} # bottom of foreach loop
