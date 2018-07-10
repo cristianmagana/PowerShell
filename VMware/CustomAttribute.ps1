@@ -1,0 +1,2 @@
+New-CustomAttribute -TargetType VirtualMachine -Name "Maintenance Window"
+Set-Annotation -Entity $Vms -CustomAttribute "Maintenance Window" -Value Developement
