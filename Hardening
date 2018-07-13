@@ -1,3 +1,18 @@
+# Title: Server Hardening Script
+# By Cristian Magana
+######################################
+# Renames-LocalAdmin
+# Disable-NetBios
+# Disable-IPV6
+# Disable-AutomaticUpdates
+# Enable-ShadowCopy
+# Rename-Server
+# Enable-ScreenSaverTimeOut
+# Enable-PageFile
+#######################################
+
+# This script is meant to be run on a vanilla server
+
 function renameLocalAdmin() {
     #function variables
     $chgPWD = $false
@@ -62,11 +77,6 @@ function disableIPV6 () {
 
     Write-Host "Disabling IPv6 Complete" -ForegroundColor Green
 }
-
-function systemPageFile () {
-    
-}
-
 
 function disableAutomaticUpdates () {
 
