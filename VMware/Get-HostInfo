@@ -1,0 +1,9 @@
+Get-VMHost | Select @{N="Cluster";E={$_.Parent}},
+                     Name,
+                     @{N="HostModel";E={$_.Model}},
+                     @{N="Bios Version";E={$_.ExtensionData.Hardware.BiosInfo.BiosVersion}},   
+                     @{N="Bios Release Date";E={$_.ExtensionData.Hardware.BiosInfo.ReleaseDate}},
+                     ConnectionState,PowerState,NumCpu,CpuUsageMhz,CpuTotalMhz,
+                     @{N="MemoryTotalGB";E={[math]::Round($_.MemoryTotalGB,2)}},
+                     @{N="MemoryUsageGB";E={[math]::Round($_.MemoryUsageGB,2)}},
+                     Version | sort version, Cluster | ft
