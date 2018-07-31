@@ -1,0 +1,11 @@
+Get-VMHost | Where-Object {$_.State -eq “Connected”} |
+%{Get-View $_.ID} |
+%{$esxname = $_.Name; Get-View $_.ConfigManager.NetworkSystem} |
+%{ foreach($physnic in $_.NetworkInfo.Pnic){
+$pnicInfo = $_.QueryNetworkHint($physnic.Device)
+foreach($hint in $pnicInfo){
+Write-Host $esxname $physnic.Device
+if( $hint.ConnectedSwitchPort ) {
+$hint.ConnectedSwitchPort
+} else {
+Write-Host “No CDP information available.”; Write-Host } } } }
