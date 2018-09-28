@@ -1,0 +1,24 @@
+# Date: 06/13/2018
+# Title: Take Snapshots
+# By: Cristian Magana
+# Version: 1.0
+
+# Stores All XXXX VCSAs In An Array
+$vCSA = @( 
+    "VC1.org",
+	"VC2.org",
+	"VC3.org",
+	"tec.org"
+);
+
+# Securely Pass Credentials Over The Network.
+$Credentials = Get-Credential
+
+# Establishes Connection To VCSAs.
+clear
+Write-Host "Connecting To All CUCSi vCenters.." -ForegroundColor Green
+Connect-VIServer -Server $vCSA -Credential $Credentials
+
+$VM1 = Get-Content C:\Users\Cristianm\Desktop\serv.txt
+
+Get-VM $VM1 | New-Snapshot -Memory:$false -confirm:$true -name "09-27-18 TLS Changes"
