@@ -1,0 +1,1 @@
+Get-VIEvent -maxsamples 1000000 -Start (Get-Date).AddDays(-90) | where {$_.Gettype().Name-eq "VmCreatedEvent" -or $_.Gettype().Name-eq "VmBeingClonedEvent" -or $_.Gettype().Name-eq "VmBeingDeployedEvent"} |Sort CreatedTime -Descending |Select CreatedTime, UserName,FullformattedMessage 
