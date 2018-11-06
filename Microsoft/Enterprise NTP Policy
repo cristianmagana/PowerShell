@@ -1,0 +1,34 @@
+Enterprise NTP Policy
+
+We have designated nist time servers for our enterprise ntp peer, please ensure each site is using a nist peer.
+
+Firewalls, Switches, ESX hosts, Phone Systems, Storage, Physical Servers, and Routers will need to point to site NTP Server
+
+Here is a list of the time servers for nist, I choose a few for the instructions;
+http://tf.nist.gov/tf-cgi/servers.cgi
+
+If you are using a Fortigate for time server set the time server to time.nist.gov
+config system ntp 
+set ntpsync enable 
+set type custom        -----> Change type first
+set syncinterval 1 
+config ntpserver 
+edit 1 
+set server "1.1.1.1"   -----> NTP server IP 
+set ntpv3 disable 
+next 
+end 
+set source-ip 0.0.0.0 
+set server-mode disable 
+end
+
+If you are using a physical domain controller here are the instructions
+
+With an admin command prompt
+Net stop w32time
+W32tm /config /manualpeerlist:"time-a.nist.gov, time-b.nist.gov, time-c.nist.gov"
+W32tm /config /reliable:yes
+Net start w32time
+
+You can view the current time servers with
+ W32tm /query /peers
