@@ -1,0 +1,13 @@
+--- Check AD replication
+Repadmin showrepl
+
+
+-- Reset local security trust
+Psexec \\server cmd
+netdom resetpwd /s:ServerDC /ud:domain\username /pd:* 
+
+--- Domain Rejoin without Reboot
+Powershell
+Import-module activedirectory -force
+Reset-computermachinepassword - server dc -credential domain\login
+
