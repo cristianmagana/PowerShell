@@ -1,12 +1,4 @@
-##########################################################################
- # 
- # Get-VMwareVMList
- # SAM Gold Toolkit
- # Original Source: Jon Mulligan (Sam360)
- #
- ##########################################################################
-
- <#
+<#
 .SYNOPSIS
 Retrieves physical host and virtual machine data from a VMware vSphere or vCenter server
 .DESCRIPTION
