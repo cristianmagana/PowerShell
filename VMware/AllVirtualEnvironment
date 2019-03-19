@@ -104,16 +104,7 @@ function LogProgress($progressDescription){
 }
                                                                           
 function LogEnvironmentDetails {
-	LogText -Color Gray "   _____         __  __    _____       _     _   _______          _ _    _ _   "
-	LogText -Color Gray "  / ____|  /\   |  \/  |  / ____|     | |   | | |__   __|        | | |  (_) |  "
-	LogText -Color Gray " | (___   /  \  | \  / | | |  __  ___ | | __| |    | | ___   ___ | | | ___| |_ "
-	LogText -Color Gray "  \___ \ / /\ \ | |\/| | | | |_ |/ _ \| |/ _`` |    | |/ _ \ / _ \| | |/ / | __|"
-	LogText -Color Gray "  ____) / ____ \| |  | | | |__| | (_) | | (_| |    | | (_) | (_) | |   <| | |_ "
-	LogText -Color Gray " |_____/_/    \_\_|  |_|  \_____|\___/|_|\__,_|    |_|\___/ \___/|_|_|\_\_|\__|"
-	LogText -Color Gray " "
 	LogText -Color Gray " Get-VMwareVMList.ps1"
-	LogText -Color Gray " "
-
 	$OSDetails = Get-WmiObject Win32_OperatingSystem
 	LogText -Color Gray "Computer Name:        $($env:COMPUTERNAME)"
 	LogText -Color Gray "User Name:            $($env:USERNAME)@$($env:USERDNSDOMAIN)"
