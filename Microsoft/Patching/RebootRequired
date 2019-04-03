@@ -1,0 +1,14 @@
+Import-Module ActiveDirectory
+
+$Servers = Get-ADComputer -Filter * -Properties operatingsystem |
+    Where operatingsystem -Match 'server'
+$path = 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager'
+$name = 'PendingFileRenameOperations'
+Invoke-Command -ComputerName $Servers.name -Ea 0 -ScriptBlock {
+
+    Get-ItemProperty -Path $using:path -Name $using:name } | Select-Object pscomputername, @{
+
+    LABEL='RebootRequired'; 
+    EXPRESSION={if($_.PendingFileRenameOperations){$true}}}
+
+
