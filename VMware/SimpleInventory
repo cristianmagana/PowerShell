@@ -1,0 +1,34 @@
+#$Cred = Get-Credential 
+
+Connect-VIServer -Server 
+
+#Gathering VM settings
+
+Write-Host "Gathering VM statistics"
+
+$report = @()
+
+
+foreach($vm in Get-View -ViewType Virtualmachine){
+
+    $vms = "" | Select-Object Name, DNSName, State, IPAddress, OS, Notes
+
+    $vms.Name = $vm.Name
+
+    $vms.DNSName = $vm.guest.hostname
+
+    $vms.State = $vm.summary.runtime.powerState
+
+    $vms.OS = $vm.Config.GuestFullName
+
+    $vms.IPAddress = $vm.guest.ipAddress
+
+    $vms.Notes = $vm.Config.Annotation
+
+    $Report += $vms
+
+}
+
+$report | Export-CSV C:\users\cristianm\Desktop\miTEST.csv
+
+
