@@ -7,3 +7,12 @@ Get-VMHost | Select @{N="Cluster";E={$_.Parent}},
                      @{N="MemoryTotalGB";E={[math]::Round($_.MemoryTotalGB,2)}},
                      @{N="MemoryUsageGB";E={[math]::Round($_.MemoryUsageGB,2)}},
                      Version | sort version, Cluster | ft
+
+
+Get-VMHost | Select Name,
+                     @{N="Cluster";E={$_.Parent}},
+                     Version,
+                     @{N="DNS Search Domains";E={[string]::Join(',',($_.ExtensionData.Config.Network.DnsConfig.SearchDomain))}},  
+                     @{N="Vender"; E={$_.Manufacturer }},
+                     @{N="Model";E={$_.Model}},
+                     @{N="ServiceTage";E={$_.ExtensionData.summary.hardware.otheridentifyinginfo | select-object -ExpandProperty IdentifierValue -last 1}} | Export-CSV C:\users\cristianm\Desktop\_Host.csv
