@@ -1,7 +1,6 @@
-# Date: 09-27-2018
-# Title: Get-DatastoreCapacities
+# Date: 05-07-19
 # By: Cristian Magana
-# Version: 1.0
+# Version: 1.2 - Updated with VxRails connections to single session
 
 # Stores All XXXX VCSAs In An Array
 $vCSA = @( 
@@ -10,32 +9,31 @@ $vCSA = @(
     "A1PMVXMA2.tmg.net",
     "A1PVDIVC01.tmg.net",
     "A2PMVXMA1.tmg.net"
-S1PVIVC01 – Waukee Server vCenter – vBlock
-A2PVIVC01 – Denver Server vCenter – vBlock
-A1PVDIVC01 – Waukee VDI vCenter – vBlock
-A1PMVXMA1 - Waukee Feedzai MGMT vCenter – vxRack
-A1PMVXMA2 - Waukee Feedzai Server vCenter - vxRack
-A2PMVXMA1 – Denver Feedzai MGMT vCenter – vxRack
-A2PMVXMA2 – Denver Feedzai Server vCenter - vxRack
-SCPVIVC01 – Clive Server vCenter - Flexpod
-A1PVCSA01.CORP.COOP.ORG - VxRail VDI Waukee
-A2PVCSA01.CORP.COOP.ORG - VxRail VDI Denver 
-
+    "A1PVDIVC01.tmg.net",
+    "A1PMVXMA1.tmg.net",
+    "A2PMVXMA2.tmg.net",
+    "SCPVIVC01.tmg.net"
 );
 
+$vXRails =@(
+    "A1PVCSA01.CORP.COOP.ORG" 
+    "A2PVCSA01.CORP.COOP.ORG"
+);
+
+
 # Securely Pass Credentials Over The Network.
-$Credentials = Get-Credential
+Write-Host "Enter your TMG.net Credentials" -ForegroundColor Green
+$CredentialsTMG = Get-Credential
 
-Write-Host "Connecting To All XXXX vCenters.." -ForegroundColor Green
-Connect-VIServer -Server $vCSA -Credential $Credentials
+# Securely Pass Credentials Over The Network.
+Write-host "Enter your CORP.COOP Credentials" -ForegroundColor Green
+$CredentialsCORP = Get-Credential
 
-S1PVIVC01 – Waukee Server vCenter – vBlock
-A2PVIVC01 – Denver Server vCenter – vBlock
-A1PVDIVC01 – Waukee VDI vCenter – vBlock
-A1PMVXMA1 - Waukee Feedzai MGMT vCenter – vxRack
-A1PMVXMA2 - Waukee Feedzai Server vCenter - vxRack
-A2PMVXMA1 – Denver Feedzai MGMT vCenter – vxRack
-A2PMVXMA2 – Denver Feedzai Server vCenter - vxRack
-SCPVIVC01 – Clive Server vCenter - Flexpod
-A1PVCSA01.CORP.COOP.ORG - VxRail VDI Waukee
-A2PVCSA01.CORP.COOP.ORG - VxRail VDI Denver 
+Write-Host "Connecting To All TMG vCenters.." -ForegroundColor Green
+Connect-VIServer -Server $vCSA -Credential $CredentialsTMG
+
+Write-Host "Connecting To All TMG vCenters.." -ForegroundColor Green
+Connect-VIServer -Server $vXRails -Credential $CredentialsCORP
+
+
+
