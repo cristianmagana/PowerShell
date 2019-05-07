@@ -1,0 +1,41 @@
+# Date: 09-27-2018
+# Title: Get-DatastoreCapacities
+# By: Cristian Magana
+# Version: 1.0
+
+# Stores All XXXX VCSAs In An Array
+$vCSA = @( 
+    "S1PVIVC01.tmg.net",
+    "A2PVIVC01.tmg.net",
+    "A1PMVXMA2.tmg.net",
+    "A1PVDIVC01.tmg.net",
+    "A2PMVXMA1.tmg.net"
+S1PVIVC01 – Waukee Server vCenter – vBlock
+A2PVIVC01 – Denver Server vCenter – vBlock
+A1PVDIVC01 – Waukee VDI vCenter – vBlock
+A1PMVXMA1 - Waukee Feedzai MGMT vCenter – vxRack
+A1PMVXMA2 - Waukee Feedzai Server vCenter - vxRack
+A2PMVXMA1 – Denver Feedzai MGMT vCenter – vxRack
+A2PMVXMA2 – Denver Feedzai Server vCenter - vxRack
+SCPVIVC01 – Clive Server vCenter - Flexpod
+A1PVCSA01.CORP.COOP.ORG - VxRail VDI Waukee
+A2PVCSA01.CORP.COOP.ORG - VxRail VDI Denver 
+
+);
+
+# Securely Pass Credentials Over The Network.
+$Credentials = Get-Credential
+
+Write-Host "Connecting To All XXXX vCenters.." -ForegroundColor Green
+Connect-VIServer -Server $vCSA -Credential $Credentials
+
+S1PVIVC01 – Waukee Server vCenter – vBlock
+A2PVIVC01 – Denver Server vCenter – vBlock
+A1PVDIVC01 – Waukee VDI vCenter – vBlock
+A1PMVXMA1 - Waukee Feedzai MGMT vCenter – vxRack
+A1PMVXMA2 - Waukee Feedzai Server vCenter - vxRack
+A2PMVXMA1 – Denver Feedzai MGMT vCenter – vxRack
+A2PMVXMA2 – Denver Feedzai Server vCenter - vxRack
+SCPVIVC01 – Clive Server vCenter - Flexpod
+A1PVCSA01.CORP.COOP.ORG - VxRail VDI Waukee
+A2PVCSA01.CORP.COOP.ORG - VxRail VDI Denver 
