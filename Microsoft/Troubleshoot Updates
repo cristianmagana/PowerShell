@@ -1,0 +1,15 @@
+DISM /Online /Cleanup-Image /Scanhealth
+
+DISM /Online /Cleanup-Image /RestoreHealth
+
+Dism /Online /Cleanup-Image /RestoreHealth /Source:wim:D:\sources\install.wim:1 /limitaccess
+
+I had also tried the june and pre-view updates for next month but both still had the same error. 
+
+In the end I finaly got the update to install. To get it working i had to run 
+
+expand F:\windows8.1-kb3205401-x64_90deeb4a6a70f1bb72a229bf8337f058ad0071a0.msu /f:* F:\KB3205401
+
+Dism /online /add-package /packagepath:F:\KB3205401\Windows8.1-KB3205401-x64.cab
+
+Once that had completed I restarted the server and retried the updates and they have installed and there are no errors in the CBS logs. 
