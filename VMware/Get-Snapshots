@@ -27,7 +27,7 @@ Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-3.5)} | Select
 
 #Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-7)} | Select-Object VM,Name,Created,@{N="SizeGB";E={[math]::Round($_.SizeGB,2)}} | Sort Created | Export-CSV C:\Users\##YOUR USER ID##\Desktop\Snapshots.CSV
 
-
+#Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-0.5)} | Select-Object VM,Name,Created,@{N="SizeGB";E={[math]::Round($_.SizeGB,2)}} | Sort SizeGB | Remove-Snapshot -Confirm:$true
 
 
  
