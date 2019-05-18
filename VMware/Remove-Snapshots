@@ -1,0 +1,23 @@
+#Connect to vSphere
+$VIServer = Read-Host "Enter IP or Hostname for your VI Server"
+$VIUser = Read-Host "Enter Username"
+$VIPass = Read-Host "Enter Password"
+Connect-VIServer -server $VIServer -user $VIUser -pass $VIPass
+
+#Enumerate VMs and search for Protect Snapshots.  Red machines have snapshots to remove, green have no snapshots.
+foreach ($vm in get-vm | sort Name) {
+                $vmname = $vm.name
+                $snaps = get-snapshot -vm $vm 
+                foreach ($snap in $snaps) {
+                                $snapName = $snap.name
+                                if ($snapname -like "Protect Patch") {
+                                                Write-Host "Found snapshot: $snapname on $vmname" -foregroundcolor red 
+                                               
+                                                remove-snapshot -snapshot $snap -confirm:$false
+                                }
+                                Else {
+                                                Write-Host "No protect snapshot found on $vmname" -foregroundcolor green 
+                                }
+                }
+}
+
