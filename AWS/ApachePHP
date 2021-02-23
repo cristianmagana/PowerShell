@@ -25,3 +25,6 @@
     }
   ]
 }
+
+
+AWSCLI: aws ssm send-command --document-name "qls-3962160-1aa8eff7652523f2-InstallDashboardApp-2O2AZKBPLA2A" --document-version "1" --targets '[{"Key":"InstanceIds","Values":["i-02048211b7b08e7d2"]}]' --parameters '{}' --timeout-seconds 600 --max-concurrency "50" --max-errors "0" --region us-west-2
