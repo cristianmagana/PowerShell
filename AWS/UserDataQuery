@@ -1,0 +1,3 @@
+wget https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-100-SYSOPS/v3.3.31/lab-2-ec2-linux/scripts/UserData.txt
+
+cat UserData.txt
