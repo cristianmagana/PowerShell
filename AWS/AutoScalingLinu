@@ -1,0 +1,35 @@
+################################   EC2 PREP   #####################################
+cd /home/ec2-user/
+
+more UserData.txt
+
+find -wholename /root/.*history -wholename /home/*/.*history -exec rm -f {} \;
+find / -name 'authorized_keys' -exec rm -f {} \;
+rm -rf /var/lib/cloud/data/scripts/*
+
+#KEYNAME, AMIID, SUBNET, HTTPACCESS
+#Retrieves Instance ID
+
+aws ec2 run-instances --key-name KEYNAME --instance-type t3.micro --image-id AMIID --user-data file:///home/ec2-user/UserData.txt --security-group-ids HTTPACCESS --subnet-id SUBNETID --associate-public-ip-address --tag-specifications 'ResourceType=instance,
+Tags=[{Key=Name,Value=WebServerBaseImage}]' --output text --query 'Instances[*].InstanceId'
+
+#NEW-INSTANCE-ID -> ^
+aws ec2 wait instance-running --instance-ids NEW-INSTANCE-ID
+
+#Query New Instance Public DNS
+aws ec2 describe-instances --instance-id NEW-INSTANCE-ID --query 'Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicDnsName'
+
+#Create a Custom AMI
+aws ec2 create-image --name WebServer --instance-id NEW-INSTANCE-ID
+
+
+################################   ASG PREP   #####################################
+
+Create L7 LB
+=Configure Health Checks [ Paths, Interval, Threshold ] 
+
+Create Luanch Configuration
+
+Create ASG
+=Desired, Min, Max
+
