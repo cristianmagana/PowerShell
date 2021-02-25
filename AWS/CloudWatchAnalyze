@@ -1,0 +1,39 @@
+CloudWatch -> log groups -> HttpAccessLog/HttpErrorLogs
+
+Create Metric Filter in CloudWatch Logs
+- Log groups
+- Select HttpAccessLogs
+- Select Action
+- Create metric filter : filter patter [ip, id, user, timestamp, request, status_code=404, size] | select log data to test
+- Next
+- Filter name, metrics namespace, metric name, metric value, create metric
+
+Create Alarm Using Filter
+- select filter
+- create alarm
+-- Period, Greaterthan, threshold
+- Next
+- Create new topic (SNS topic)
+- enter email
+- Alarm Name | Description
+
+
+-------------------------------------------------------
+
+Real Time Notifications Using Lambda
+CloudWatch - Rules
+- Create Rule
+- Service Name | Event Type
+- Add Target - Lambda -> SNS Topic
+- Configure Details
+--  Rule Definition Name | Description
+
+Real Time Config
+Simple Notification Service
+- Topics
+- Select specific topic -> create subscription
+-- protocol SMS +188888888
+-- create subscription
+
+
+
